@@ -1,0 +1,101 @@
+<html>
+  <head>
+    <meta charset="UTF-8" />
+    <title>Spartan Race Graphs</title>
+    <script type="text/javascript" src="deps/d3.min.js"></script>
+    <script type="text/javascript" src="deps/crossfilter.min.js"></script>
+    <script type="text/javascript" src="deps/dc.min.js"></script>
+    <script type="text/javascript" src="deps/xlsx.min.js"></script>
+    <link rel="stylesheet" type="text/css" href="deps/dc.min.css"/>
+
+    <script type="text/javascript" src="app/mockData.js"></script>
+    <script type="text/javascript" src="app/charts.js"></script>
+  </head>
+  <body>
+    <div id="charts" class="ui stacking grid container">
+      <div class="summary">
+        <div>
+          <span class="registered"></span>
+          <span class="participant"></span>
+        </div>
+        <div>
+          <span class="didNotFinish"></span>
+          <span class="disqualified"></span>
+        </div>
+        <div>
+          <span class="fastest"></span>
+          <span class="persistent"></span>
+          <span class="average"></span>
+        </div>
+      </div>
+      <div class="five column row">
+        <div class="column">
+          <div id="sexChart">
+          <h4 class="ui header">Sex</h4>
+          </div>
+        </div>
+        <div class="column">
+          <div id="categoryChart">
+          <h4 class="ui header">Category</h4>
+          </div>
+        </div>
+        <div class="column">
+          <div id="countryChart">
+          <h4 class="ui header">Country</h4>
+          </div>
+        </div>
+        <div class="column">
+          <div id="teamChart">
+          <h4 class="ui header">Team</h4>
+          </div>
+        </div>
+      </div>
+      <div class="two column row">
+        <div class="column">
+          <div id="ageChart">
+          <h4 class="ui header">Age Group</h4>
+          </div>
+        </div>
+        <div class="column">
+          <div id="resultChart">
+          <h4 class="ui header">Result</h4>
+          </div>
+        </div>
+      </div>
+      <div class="one column row">
+        <div class="column">
+          <div id="entityChart">
+            <table>
+            </table>
+          </div>
+        </div>
+      </div>
+    </div>
+    <script>
+      var
+        ndx = crossfilter(data),
+        all = summaryGroup(ndx),
+        charts = [
+          registeredChart(all),
+          participantsChart(all),
+          didNotFinishChart(all),
+          disqualifiedChart(all),
+          fastestChart(all),
+          persistentChart(all),
+          averageResultChart(all),
+          categoryChart(ndx),
+          sexChart(ndx),
+          teamChart(ndx),
+          countryChart(ndx),
+          resultChart(ndx, all),
+          (age = ageChart(ndx)),
+          (entity = entityChart(ndx, age.dimension(), all))
+        ];
+      charts.forEach(function(chart) {
+        chart
+        .on('filtered', function() { entity.resetPage() })
+        .render();
+      });
+    </script>
+  </body>
+</html>
