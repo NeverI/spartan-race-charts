@@ -105,7 +105,7 @@ function didNotFinishChart(all)
     .html({
       none: 'Everybody finished the race',
       one: 'One person did not finished',
-      some: '%number participiant did not finished the race'
+      some: '%number participant did not finished the race'
     })
   ;
 }
@@ -254,7 +254,8 @@ function resultChart(ndx, all)
     .x(d3.scale.linear().domain([fastest, slowest]))
     .centerBar(true)
     .elasticX(true)
-    .elasticX(true)
+    .elasticY(true)
+    .width(1000)
     ;
 }
 
@@ -291,7 +292,8 @@ function ageChart(ndx)
     .x(d3.scale.linear().domain([0,1]))
     .centerBar(true)
     .elasticX(true)
-    .elasticX(true)
+    .elasticY(true)
+    .width(1000)
     ;
 }
 
@@ -318,6 +320,7 @@ function entityChart(ndx, dimension, all)
 
       return d.result;
     })
+    .width(1000)
     .size(Infinity)
     .beginSlice(0)
     .endSlice(pageSize)
