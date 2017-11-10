@@ -10,8 +10,13 @@
 
     <script type="text/javascript" src="app/mockData.js"></script>
     <script type="text/javascript" src="app/charts.js"></script>
+    <script type="text/javascript" src="app/xlsUploader.js"></script>
   </head>
   <body>
+    <div id="header">
+      <label for="inputFile">Upload an xls from the <a href="http://results.onlinesystem.cz/Results/Index" target="_blank">onlinesystem</a></label>
+      <input type="file" id="inputFile"/>
+    </div>
     <div id="charts" class="ui stacking grid container">
       <div class="summary">
         <div>
@@ -73,7 +78,8 @@
     </div>
     <script>
       var
-        ndx = crossfilter(data),
+        fileUploader = xlsUploader(),
+        ndx = crossfilter([]),
         all = summaryGroup(ndx),
         charts = [
           registeredChart(all),
@@ -95,6 +101,11 @@
         chart
         .on('filtered', function() { entity.resetPage() })
         .render();
+      });
+      fileUploader.addEventListener('xlsParsed', function(event) {
+        ndx.remove();
+        ndx.add(event.data);
+        dc.redrawAll();
       });
     </script>
   </body>
