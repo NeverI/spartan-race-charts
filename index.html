@@ -105,6 +105,7 @@
       fileUploader.addEventListener('xlsParsed', function(event) {
         ndx.remove();
         ndx.add(event.data);
+        entity.resetPage();
         dc.redrawAll();
       });
     </script>
