@@ -303,6 +303,7 @@ function entityChart(ndx, dimension, all)
     chart = dc.dataTable("#entityChart table")
     slowest = all.value().slowest(),
     page = 0,
+    maxPage = 1,
     pageSize = 20
   ;
 
@@ -392,26 +393,35 @@ function entityChart(ndx, dimension, all)
     display();
   }
   function display() {
-    var pages;
+    var
+      pages,
+      firstPage = page < 11 ? 1 : page >= maxPage - 11 ? maxPage - 20 : page - 10,
+      lastPage = page + 11 > maxPage ? maxPage : page <= 10 ? 21 : page + 11
+    ;
+
+    d3.select('#entityChart .first')
+      .attr('disabled', page == 0 ? 'true' : null);
     d3.select('#entityChart .prev')
       .attr('disabled', page == 0 ? 'true' : null);
     d3.select('#entityChart .next')
-      .attr('disabled', pageSize * page + pageSize >= all.value().registered ? 'true' : null);
+      .attr('disabled', page == maxPage-1 ? 'true' : null);
+    d3.select('#entityChart .last')
+      .attr('disabled', page == maxPage-1 ? 'true' : null);
     (pages = d3.select('#entityChart .pages')
       .selectAll('span')
-      .data(d3.range(1, Math.ceil(all.value().registered / pageSize) + 1)))
+      .data(d3.range(firstPage, lastPage)))
       .enter()
         .append('span')
-        .text(function(d) { return d})
-        .on('click', function(newPage) {
-          page = newPage - 1
-          update();
-          chart.redraw();
-        })
       ;
     pages
       .classed('active', function(d) {
         return d == page + 1
+      })
+      .text(function(d) { return d})
+      .on('click', function(newPage) {
+        page = newPage - 1
+        update();
+        chart.redraw();
       })
       .exit()
         .remove()
@@ -422,31 +432,34 @@ function entityChart(ndx, dimension, all)
     update();
     chart.redraw();
   }
+  function first() {
+    page = 0;
+    update();
+    chart.redraw();
+  }
+  function last() {
+    page = maxPage - 1;
+    update();
+    chart.redraw();
+  }
 
   var originalRender = chart.render;
   chart.render = function() {
     originalRender.apply(chart, arguments);
-    d3
-      .select('#entityChart')
-      .append('button')
-        .attr('class', 'prev')
-        .text('Prev')
-        .on('click', prev)
+    createButton('#entityChart', 'first', '<<', first);
+    createButton('#entityChart', 'prev', '<', prev);
     d3
       .select('#entityChart')
       .append('div')
       .classed('pages', true)
-    d3
-      .select('#entityChart')
-      .append('button')
-        .attr('class', 'next')
-        .text('Next')
-        .on('click', next)
     ;
+    createButton('#entityChart', 'next', '>', next);
+    createButton('#entityChart', 'last', '>>', last);
     update();
     return chart;
   };
   chart.resetPage = function() {
+    maxPage = Math.ceil(all.value().registered / pageSize);
     page = 0;
     update();
     chart.redraw();
@@ -454,4 +467,14 @@ function entityChart(ndx, dimension, all)
   }
 
   return chart;
+}
+
+function createButton(parent, cls, text, click)
+{
+    return d3
+      .select(parent)
+      .append('button')
+        .attr('class', cls)
+        .text(text)
+        .on('click', click)
 }
