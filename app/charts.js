@@ -51,10 +51,10 @@ function summaryGroup(ndx)
         resultSum: 0,
         results: {},
         fastest: function() {
-          return parseFloat(d3.min(Object.keys(this.results)));
+          return parseFloat(d3.min(Object.keys(this.results), parseFloat));
         },
         slowest: function() {
-          return parseFloat(d3.max(Object.keys(this.results)));
+          return parseFloat(d3.max(Object.keys(this.results), parseFloat));
         }
       };
     }
