@@ -240,7 +240,6 @@ function resultChart(ndx, all)
   chart
     .xAxisPadding('0.001%')
     .xAxis()
-    .tickValues(d3.range(fastest, slowest+1, tickStepping))
     .tickFormat(formatTime);
 
   chart
