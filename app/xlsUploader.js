@@ -36,6 +36,12 @@ function parseXls(content, raceDate)
     row = undefined
   ;
 
+  if (sheet.F2.w.length == 2) {
+    cellParser = cellParser2;
+  } else {
+    cellParser = cellParser1;
+  }
+
   while(rowIndex <= sheet['!range'].e.r) {
     row = {};
     colIndex = 0;
@@ -58,7 +64,7 @@ function parseXls(content, raceDate)
   return data;
 }
 
-function cellParser(column, value, row, raceDate)
+function cellParser1(column, value, row, raceDate)
 {
     switch(column) {
       case 'A':
@@ -123,4 +129,29 @@ function parseTime(time)
   }
 
   return parsed[0] * 60 + parsed[1] * 1 + (parsed[2] / 60);
+}
+
+function cellParser2(column, value, row, raceDate)
+{
+    switch(column) {
+      case 'A':
+        return row.rank = parseInt(value);
+      case 'D':
+        return row.bib = value;
+      case 'F':
+        row.category = value[0];
+        return row.sex = value[1] == 'M' ? 'M' : 'F';
+      case 'G':
+        row.birth = parseBirth(value);
+        return row.age = getAge(row.birth, raceDate);
+      case 'H':
+        return row.city = value;
+      case 'I':
+        return row.team = value;
+      case 'J':
+        return row.nationality = value;
+      case 'K':
+        row.formattedResult = value;
+        return row.result = parseTime(row.formattedResult);
+    }
 }
