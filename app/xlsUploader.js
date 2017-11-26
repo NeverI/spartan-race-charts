@@ -25,87 +25,72 @@ function xlsUploader()
 
 function parseXls(content, raceDate)
 {
-    var
-      workbook = XLSX.read(content, {type: 'binary'}),
-      sheet = workbook.Sheets[workbook.SheetNames[0]],
-      dateFormatter = d3.format('02f'),
-      data = [],
-      skipFirstRow = undefined,
-      row = undefined
-    ;
+  var
+    cols = ['A', 'B', 'C', 'D', 'E', 'F', 'G', 'H', 'I', 'J', 'K', 'L', 'M'],
+    workbook = XLSX.read(content, {type: 'binary'}),
+    sheet = workbook.Sheets[workbook.SheetNames[0]],
+    data = [],
+    rowIndex = sheet.A1.w == 1 ? 1 : 2,
+    colIndex = undefined,
+    cellParser = undefined,
+    row = undefined
+  ;
 
-    for (var cell in sheet) {
-      var
-        col = cell[0],
-        rowNumb = cell.substr(1, cell.length)
-      ;
+  while(rowIndex <= sheet['!range'].e.r) {
+    row = {};
+    colIndex = 0;
 
-      if (skipFirstRow === undefined && cell == 'A1' && sheet[cell].w != 1) {
-        skipFirstRow = true;
-      }
-      if (rowNumb == 1 && skipFirstRow) {
+    while(colIndex <= sheet['!range'].e.c) {
+      if (sheet[cols[colIndex] + rowIndex] === undefined) {
+        colIndex++;
         continue;
       }
 
-      if (col == 'A') {
-        if (row) {
-          data.push(row);
-        }
-        row = {};
-      }
+      cellParser(cols[colIndex], sheet[cols[colIndex] + rowIndex].v, row, raceDate);
 
-      switch(col) {
-        case 'A':
-          row.rank = parseInt(sheet[cell].w);
-          break
-        case 'D':
-          row.bib = sheet[cell].w;
-          break
-        case 'E':
-          row.name = sheet[cell].w;
-          break
-        case 'F':
-          row.sex = sheet[cell].w;
-          break
-        case 'G':
-          row.category = sheet[cell].w[0];
-          break
-        case 'H':
-          row.birth = parseBirth(sheet[cell].w, dateFormatter);
-
-          birth = new Date(row.birth);
-          birthYearMonthAndDay = new Date();
-          birthYearMonthAndDay.setYear(new Date(birth.getFullYear()));
-
-          row.age = raceDate.getFullYear() - birth.getFullYear() - (birth > birthYearMonthAndDay ? 0 : 1)
-          if (!row.age) {
-            console.log(row, birthYearMonthAndDay);
-          }
-          break
-        case 'I':
-          row.city = sheet[cell].w;
-          break
-        case 'J':
-          row.team = sheet[cell].w;
-          break
-        case 'K':
-          row.nationality = sheet[cell].w;
-          break
-        case 'L':
-          row.formattedResult = sheet[cell].w;
-          row.result = parseTime(row.formattedResult);
-          break
-      }
+      colIndex++;
     }
 
     data.push(row);
+    rowIndex++;
+  }
 
-    return data;
+  return data;
 }
 
-function parseBirth(date, format)
+function cellParser(column, value, row, raceDate)
 {
-  var parsed = date.match(/^(\d\d?)[\/\.](\d\d?)[\/\.](\d{4})$/);
+    switch(column) {
+      case 'A':
+        return row.rank = parseInt(value);
+      case 'D':
+        return row.bib = value;
+      case 'E':
+        return row.name = value;
+      case 'F':
+        return row.sex = value;
+      case 'G':
+        return row.category = value[0];
+      case 'H':
+        row.birth = parseBirth(value);
+        return row.age = getAge(row.birth, raceDate);
+      case 'I':
+        return row.city = value;
+      case 'J':
+        return row.team = value;
+      case 'K':
+        return row.nationality = value;
+      case 'L':
+        row.formattedResult = value;
+        return row.result = parseTime(row.formattedResult);
+    }
+}
+
+function parseBirth(date)
+{
+  var
+    format = d3.format('02f'),
+    parsed = date.match(/^(\d\d?)[\/\.](\d\d?)[\/\.](\d{4})$/);
   if (parsed) {
     return parsed[3] + '-' + format(parsed[1]) + '-' + format(parsed[2]);
   }
@@ -117,6 +102,17 @@ function parseBirth(date, format)
   }
 
   throw new Error('Unknown date format: ' + date);
+}
+
+function getAge(birthString, raceDate)
+{
+  var
+    birth = new Date(birthString),
+    birthYearMonthAndDay = new Date()
+  ;
+  birthYearMonthAndDay.setYear(new Date(birth.getFullYear()));
+
+  return raceDate.getFullYear() - birth.getFullYear() - (birth > birthYearMonthAndDay ? 0 : 1);
 }
 
 function parseTime(time)
