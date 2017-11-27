@@ -4,7 +4,7 @@ races = [
     country: 'HUN',
     city: 'Eplény',
     type: 'Sprint',
-    url: 'results/2017EplenySprint.xls',
+    url: 'races/2017EplenySprint.xls',
     map: 'https://drive.google.com/file/d/0Bx_qmqQOXLBVV0FNZzhadUp2Zmc/view',
     video: 'https://www.facebook.com/SpartanRaceHungary/videos/1737858706286459/'
   },
@@ -13,7 +13,7 @@ races = [
     country: 'HUN',
     city: 'Eplény',
     type: 'Beast',
-    url: 'results/2017EplenyBeast.xls',
+    url: 'races/2017EplenyBeast.xls',
     map: 'https://drive.google.com/file/d/0Bx_qmqQOXLBVbnNQZ0MyblRXZnM/view',
     video: 'https://www.facebook.com/SpartanRaceHungary/videos/1736909223048074/'
   },
@@ -22,7 +22,7 @@ races = [
     country: 'CZE',
     city: 'Liberec',
     type: 'Sprint',
-    url: 'results/2017LiberecBeast.xls',
+    url: 'races/2017LiberecBeast.xls',
     map: '',
     video: ''
   },
@@ -31,7 +31,7 @@ races = [
     country: 'CZE',
     city: 'Liberec',
     type: 'Sprint',
-    url: 'results/2017LiberecSprint.xls',
+    url: 'races/2017LiberecSprint.xls',
     map: '',
     video: ''
   },
