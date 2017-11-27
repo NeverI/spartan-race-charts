@@ -9,15 +9,18 @@
     <link rel="stylesheet" type="text/css" href="deps/dc.min.css"/>
 
     <script type="text/javascript" src="app/mockData.js"></script>
+    <script type="text/javascript" src="app/races.js"></script>
     <script type="text/javascript" src="app/charts.js"></script>
     <script type="text/javascript" src="app/xlsUploader.js"></script>
   </head>
   <body>
     <div id="header">
-      <label for="inputFile">Upload an xls from the <a href="http://results.onlinesystem.cz/Results/Index" target="_blank">onlinesystem</a></label>
+      <select id="races">
+      </select>
+      <label for="inputFile">Upload an xls (example from the <a href="http://results.onlinesystem.cz/Results/Index" target="_blank">onlinesystem</a>)</label>
       <input type="file" id="inputFile"/>
     </div>
-    <div id="charts" class="ui stacking grid container">
+    <div id="charts" class="ui stacking grid container" style="display: none">
       <div class="summary">
         <div>
           <span class="registered"></span>
@@ -77,6 +80,47 @@
       </div>
     </div>
     <script>
+      d3
+        .select('#races')
+        .on('change', function(e) {
+          var race = races[document.getElementById('races').value];
+          if (!race) {
+            return;
+          }
+
+          fetch(new Request(race.url, {
+              method: 'GET',
+              credentials: 'omit'
+            }))
+            .then(function(response) {
+              return response.text();
+            })
+            .then(function(content) {
+              console.log(content);
+              return;
+              var
+                data = parseXls(content, new Date(race.date))
+                event = new Event('xlsParsed')
+                ;
+
+              event.data = data;
+              document.getElementById('inputFile').dispatchEvent(event);
+            })
+            .catch(function(e) {
+              console.log('error', e);
+            });
+        })
+        .selectAll('option')
+        .data(races)
+        .enter()
+          .append('option')
+          .attr('value', function(_, index) {
+            return index;
+          })
+          .text(function(d) {
+            return d.date + ' - ' + d.country + ' - ' + d.city + ' ' + d.type;
+          })
+          ;
       var
         fileUploader = xlsUploader(),
         ndx = crossfilter([]),
@@ -103,6 +147,7 @@
         .render();
       });
       fileUploader.addEventListener('xlsParsed', function(event) {
+        document.getElementById('chart').style.display = 'block';
         ndx.remove();
         ndx.add(event.data);
         entity.resetPage();
