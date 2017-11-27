@@ -88,12 +88,9 @@
             return;
           }
 
-          fetch(new Request(race.url, {
-              method: 'GET',
-              credentials: 'omit'
-            }))
+          fetch(race.url)
             .then(function(response) {
-              return response.text();
+              return response.arrayBuffer();
             })
             .then(function(content) {
               console.log(content);
