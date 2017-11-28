@@ -97,13 +97,16 @@
             });
         })
         .selectAll('option')
-        .data(races)
+        .data([undefined].concat(races))
         .enter()
           .append('option')
           .attr('value', function(_, index) {
-            return index;
+            return index - 1;
           })
           .text(function(d) {
+            if (!d) {
+              return 'Please choose a race...';
+            }
             return d.date + ' - ' + d.country + ' - ' + d.city + ' ' + d.type;
           })
           ;
@@ -133,7 +136,7 @@
         .render();
       });
       fileUploader.addEventListener('xlsParsed', function(event) {
-        document.getElementById('chart').style.display = 'block';
+        document.getElementById('charts').style.display = 'block';
         ndx.remove();
         ndx.add(event.data);
         entity.resetPage();
