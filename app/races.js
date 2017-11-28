@@ -58,7 +58,7 @@ races = [
     country: 'POL',
     city: 'Warsaw',
     type: 'Sprint',
-    url: 'https://media.githubusercontent.com/media/NeverI/spartan-race-charts/master/races/2017WarsowSprint.xls',
+    url: 'https://media.githubusercontent.com/media/NeverI/spartan-race-charts/master/races/2017WarsawSprint.xls',
     map: '',
     video: ''
   },
