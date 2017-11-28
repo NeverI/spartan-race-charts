@@ -40,7 +40,7 @@ races = [
     country: 'SVK',
     city: 'Kubínská Hola',
     type: 'Sprint',
-    url: 'http://results.onlinesystem.cz/ResultsDetail/ExportResult/?eventId=840&trackId=1365',
+    url: 'https://media.githubusercontent.com/media/NeverI/spartan-race-charts/master/races/2017KubinskaSprint.xls',
     map: '',
     video: ''
   },
@@ -49,7 +49,7 @@ races = [
     country: 'SVK',
     city: 'Kubínská Hola',
     type: 'Beast',
-    url: 'http://results.onlinesystem.cz/ResultsDetail/ExportResult/?eventId=840&trackId=1366',
+    url: 'https://media.githubusercontent.com/media/NeverI/spartan-race-charts/master/races/2017KubinskaBeast.xls',
     map: '',
     video: ''
   },
@@ -58,7 +58,7 @@ races = [
     country: 'POL',
     city: 'Warsaw',
     type: 'Sprint',
-    url: 'http://results.onlinesystem.cz/ResultsDetail/ExportResult/?eventId=825&trackId=1303',
+    url: 'https://media.githubusercontent.com/media/NeverI/spartan-race-charts/master/races/2017WarsowSprint.xls',
     map: '',
     video: ''
   },
@@ -67,7 +67,7 @@ races = [
     country: 'CZE',
     city: 'Litovel',
     type: 'Sprint',
-    url: 'http://results.onlinesystem.cz/ResultsDetail/ExportResult/?eventId=833&trackId=1257',
+    url: 'https://media.githubusercontent.com/media/NeverI/spartan-race-charts/master/races/2017LitovelSprint.xls',
     map: '',
     video: ''
   },
@@ -76,7 +76,7 @@ races = [
     country: 'POL',
     city: 'Krynica',
     type: 'Sprint',
-    url: 'http://results.onlinesystem.cz/ResultsDetail/ExportResult/?eventId=890&trackId=1255',
+    url: 'https://media.githubusercontent.com/media/NeverI/spartan-race-charts/master/races/2017KrynicaSprint.xls',
     map: '',
     video: ''
   },
@@ -85,7 +85,16 @@ races = [
     country: 'POL',
     city: 'Krynica',
     type: 'Super',
-    url: 'http://results.onlinesystem.cz/ResultsDetail/ExportResult/?eventId=890&trackId=1256',
+    url: 'https://media.githubusercontent.com/media/NeverI/spartan-race-charts/master/races/2017KrynicaSuper.xls',
+    map: '',
+    video: ''
+  },
+  {
+    date: '2017-07-29',
+    country: 'POL',
+    city: 'Krynica',
+    type: 'Beast',
+    url: 'https://media.githubusercontent.com/media/NeverI/spartan-race-charts/master/races/2017KrynicaBeast.xls',
     map: '',
     video: ''
   },
@@ -94,7 +103,7 @@ races = [
     country: 'SVK',
     city: 'Valčianska dolina',
     type: 'Super',
-    url: 'http://results.onlinesystem.cz/ResultsDetail/ExportResult/?eventId=830&trackId=1239',
+    url: 'https://media.githubusercontent.com/media/NeverI/spartan-race-charts/master/races/2017ValcinskaSuper.xls',
     map: '',
     video: ''
   },
@@ -103,7 +112,7 @@ races = [
     country: 'SVK',
     city: 'Valčianska dolina',
     type: 'Sprint',
-    url: 'http://results.onlinesystem.cz/ResultsDetail/ExportResult/?eventId=829&trackId=1229',
+    url: 'https://media.githubusercontent.com/media/NeverI/spartan-race-charts/master/races/2017ValcinskaSprint.xls',
     map: '',
     video: ''
   },
@@ -112,7 +121,7 @@ races = [
     country: 'SVK',
     city: 'Valčianska dolina',
     type: 'Ultra Beast',
-    url: 'http://results.onlinesystem.cz/ResultsDetail/ExportResult/?eventId=829&trackId=1230',
+    url: 'https://media.githubusercontent.com/media/NeverI/spartan-race-charts/master/races/2017ValcinskaUltra.xls',
     map: '',
     video: ''
   },
@@ -121,7 +130,7 @@ races = [
     country: 'POL',
     city: 'Trójmiasto',
     type: 'Sprint',
-    url: 'http://results.onlinesystem.cz/ResultsDetail/ExportResult/?eventId=834&trackId=1220',
+    url: 'https://media.githubusercontent.com/media/NeverI/spartan-race-charts/master/races/2017TrojmiastoSprint.xls',
     map: '',
     video: ''
   },
@@ -130,7 +139,7 @@ races = [
     country: 'HUN',
     city: 'Kazincbarcika',
     type: 'Super',
-    url: 'http://results.onlinesystem.cz/ResultsDetail/ExportResult/?eventId=827&trackId=1209',
+    url: 'https://media.githubusercontent.com/media/NeverI/spartan-race-charts/master/races/2017KazincbarcikaSuper.xls',
     map: '',
     video: ''
   },
@@ -139,7 +148,7 @@ races = [
     country: 'POL',
     city: 'Lodz',
     type: 'Sprint',
-    url: 'http://results.onlinesystem.cz/ResultsDetail/ExportResult/?eventId=831&trackId=1324',
+    url: 'https://media.githubusercontent.com/media/NeverI/spartan-race-charts/master/races/2017LodzSprint.xls',
     map: '',
     video: ''
   },
@@ -148,7 +157,7 @@ races = [
     country: 'SVK',
     city: 'Nitra',
     type: 'Sprint',
-    url: 'http://results.onlinesystem.cz/ResultsDetail/ExportResult/?eventId=869&trackId=1125',
+    url: 'https://media.githubusercontent.com/media/NeverI/spartan-race-charts/master/races/2017NitraSprint.xls',
     map: '',
     video: ''
   },
@@ -157,7 +166,7 @@ races = [
     country: 'CZE',
     city: 'Kouty',
     type: 'Sprint',
-    url: 'http://results.onlinesystem.cz/ResultsDetail/ExportResult/?eventId=823&trackId=1104',
+    url: 'https://media.githubusercontent.com/media/NeverI/spartan-race-charts/master/races/2017KoutySprint.xls',
     map: '',
     video: ''
   },
@@ -166,7 +175,7 @@ races = [
     country: 'CZE',
     city: 'Kouty',
     type: 'Super',
-    url: 'http://results.onlinesystem.cz/ResultsDetail/ExportResult/?eventId=822&trackId=1103',
+    url: 'https://media.githubusercontent.com/media/NeverI/spartan-race-charts/master/races/2017KoutySuper.xls',
     map: '',
     video: ''
   },
@@ -175,7 +184,7 @@ races = [
     country: 'POL',
     city: 'Krakow',
     type: 'Sprint',
-    url: 'http://results.onlinesystem.cz/ResultsDetail/ExportResult/?eventId=556&trackId=1245',
+    url: 'https://media.githubusercontent.com/media/NeverI/spartan-race-charts/master/races/2017KrakowSprint.xls',
     map: '',
     video: ''
   },
@@ -184,7 +193,7 @@ races = [
     country: 'HUN',
     city: 'Veszprém',
     type: 'Sprint',
-    url: 'http://results.onlinesystem.cz/ResultsDetail/ExportResult/?eventId=821&trackId=967',
+    url: 'https://media.githubusercontent.com/media/NeverI/spartan-race-charts/master/races/2017VeszpremSprint.xls',
     map: '',
     video: ''
   },
@@ -193,7 +202,7 @@ races = [
     country: 'SVK',
     city: 'Svit',
     type: 'Winter Sprint',
-    url: 'http://results.onlinesystem.cz/ResultsDetail/ExportResult/?eventId=790&trackId=1357',
+    url: 'https://media.githubusercontent.com/media/NeverI/spartan-race-charts/master/races/2017SvitSprint.xls',
     map: '',
     video: ''
   },
@@ -202,7 +211,7 @@ races = [
     country: 'CZE',
     city: 'Dolni Morava',
     type: 'Winter Sprint',
-    url: 'http://results.onlinesystem.cz/ResultsDetail/ExportResult/?eventId=789&trackId=1325',
+    url: 'https://media.githubusercontent.com/media/NeverI/spartan-race-charts/master/races/2017DolniSprint.xls',
     map: '',
     video: ''
   }
