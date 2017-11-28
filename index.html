@@ -90,21 +90,10 @@
 
           fetch(race.url)
             .then(function(response) {
-              return response.arrayBuffer();
+              return response.blob();
             })
-            .then(function(content) {
-              console.log(content);
-              return;
-              var
-                data = parseXls(content, new Date(race.date))
-                event = new Event('xlsParsed')
-                ;
-
-              event.data = data;
-              document.getElementById('inputFile').dispatchEvent(event);
-            })
-            .catch(function(e) {
-              console.log('error', e);
+            .then(function(blob) {
+              loadXlsFile(new File([blob], 'race.xls'), new Date(race.date));
             });
         })
         .selectAll('option')

@@ -6,21 +6,26 @@ function xlsUploader()
       return;
     }
 
+    loadXlsFile(input.files[0], new Date());
+  });
+
+  return input;
+}
+
+function loadXlsFile(file, raceDate)
+{
     var reader = new FileReader();
     reader.onload = function(event) {
       var
-        data = parseXls(event.target.result, new Date()),
+        data = parseXls(event.target.result, raceDate),
         event = new Event('xlsParsed')
       ;
 
       event.data = data;
-      input.dispatchEvent(event);
+      document.getElementById('inputFile').dispatchEvent(event);
     }
 
-    reader.readAsBinaryString(input.files[0]);
-  });
-
-  return input;
+    reader.readAsBinaryString(file);
 }
 
 function parseXls(content, raceDate)
