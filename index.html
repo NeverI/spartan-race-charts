@@ -136,11 +136,16 @@
         .render();
       });
       fileUploader.addEventListener('xlsParsed', function(event) {
-        document.getElementById('charts').style.display = 'block';
+        charts.forEach(function(chart) {
+          chart.filterAll();
+        });
+
         ndx.remove();
         ndx.add(event.data);
         entity.resetPage();
         dc.redrawAll();
+
+        document.getElementById('charts').style.display = 'block';
       });
     </script>
   </body>
