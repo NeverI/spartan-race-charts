@@ -36,6 +36,7 @@
           <span class="average"></span>
         </div>
       </div>
+      <span id="clearFilters" class="link">Clear filters</span>
       <div class="five column row">
         <div class="column">
           <div id="sexChart">
@@ -147,6 +148,14 @@
         dc.redrawAll();
 
         document.getElementById('charts').style.display = 'block';
+      });
+      d3.select('#clearFilters').on('click', function() {
+        charts.forEach(function(chart) {
+          chart.filterAll();
+        });
+        document.getElementById('entityFilter').value = ''
+        entity.resetPage();
+        dc.redrawAll();
       });
     </script>
   </body>
