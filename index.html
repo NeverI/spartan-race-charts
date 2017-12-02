@@ -73,6 +73,7 @@
       <div class="one column row">
         <div class="column">
           <div id="entityChart">
+            <input id="entityFilter" />
             <table>
             </table>
           </div>
@@ -128,7 +129,7 @@
           countryChart(ndx),
           resultChart(ndx, all),
           (age = ageChart(ndx)),
-          (entity = entityChart(ndx, age.dimension(), all))
+          (entity = entityChart(ndx, all))
         ];
       charts.forEach(function(chart) {
         chart

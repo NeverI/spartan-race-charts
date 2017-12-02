@@ -296,14 +296,18 @@ function ageChart(ndx)
     ;
 }
 
-function entityChart(ndx, dimension, all)
+function entityChart(ndx, all)
 {
   var
     chart = dc.dataTable("#entityChart table")
     slowest = all.value().slowest(),
     page = 0,
     maxPage = 1,
-    pageSize = 20
+    pageSize = 20,
+    entityFilter = d3.select('#entityFilter'),
+    dimension = ndx.dimension(function(d) {
+      return [d.bib, d.name, d.city, d.team].join('/**/');
+    });
   ;
 
   chart
@@ -464,6 +468,27 @@ function entityChart(ndx, dimension, all)
     chart.redraw();
     return chart;
   }
+  entityFilter.on('change', function() {
+    var
+      value = entityFilter.node().value.trim(),
+      matcher = new RegExp(value),
+      filter = function(k) {
+        return matcher.test(k);
+      }
+    ;
+
+    dimension.filterFunction(function(d) {
+      if (!value) {
+        return true;
+      }
+      var key = d.split('/**/');
+      return key.shift() == value ||
+        key.some(filter);
+      ;
+    })
+    chart.resetPage();
+    dc.redrawAll();
+  });
 
   return chart;
 }
